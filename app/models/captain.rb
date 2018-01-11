@@ -12,6 +12,7 @@ class Captain < ActiveRecord::Base
   def self.talented_seamen
     motorboaters = self.joins(boats: {boat_classifications: :classification}).where("classifications.name = ?", "Sailboat").uniq.pluck(:id)
     sailors = self.sailors.pluck(:id)
+    binding.pry
     self.where(id: motorboaters & sailors)
   end
 end
