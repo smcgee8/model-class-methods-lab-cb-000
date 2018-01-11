@@ -11,6 +11,6 @@ class Captain < ActiveRecord::Base
 
   def self.talented_seamen
     motorboaters = self.joins(boats: {boat_classifications: :classification}).where("classifications.name = ?", "Motorboat").uniq
-    motorboaters & self.sailors
+    self.find_by_sql "#{motorboaters.to_sql} INTERSECT #{self.sailors.to_sql}"
   end
 end
