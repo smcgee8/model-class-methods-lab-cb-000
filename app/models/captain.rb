@@ -14,4 +14,8 @@ class Captain < ActiveRecord::Base
     sailors = self.sailors.pluck("captains.id")
     self.where(id: motorboaters & sailors)
   end
+
+  def self.non_sailors
+
+  end
 end
