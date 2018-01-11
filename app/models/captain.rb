@@ -16,6 +16,6 @@ class Captain < ActiveRecord::Base
   end
 
   def self.non_sailors
-    self.joins(boats: {boat_classifications: :classification}).where.not("classifications.name = ?", "Sailboat").uniq
+    self.where(Captain.all.pluck(:id) - self.sailors.pluck("captains.id"))
   end
 end
