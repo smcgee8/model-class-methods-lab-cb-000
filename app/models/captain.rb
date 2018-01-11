@@ -11,6 +11,6 @@ class Captain < ActiveRecord::Base
 
   def self.talented_seamen
     motorboaters = self.joins(boats: {boat_classifications: :classification}).where("classifications.name = ?", "Motorboat").uniq
-    motorboaters.merge(self.sailors)
+    motorboaters & self.sailors
   end
 end
