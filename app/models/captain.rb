@@ -16,6 +16,6 @@ class Captain < ActiveRecord::Base
   end
 
   def self.non_sailors
-    self.where(Captain.all.pluck(:id) - self.sailors.pluck("captains.id"))
+    self.where(Captain.all.pluck(:id).to_a - self.sailors.pluck("captains.id").to_a)
   end
 end
